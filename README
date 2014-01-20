@@ -1,0 +1,6 @@
+RSS : Reused Socket Shell
+
+This project is a shellcode that allow us to get the socket that were used to communicate with a vulnerable programm, and then bind a shell on it.
+If the shellcode's too long in your exploit, you can split it into two parts, and instead of binding the shell, just write back the number of the socket, and then hardcode it in the next part of the shellcode.
+
+The code isn't optimized, do it by yourself ;)
