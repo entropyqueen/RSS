@@ -10,9 +10,6 @@ _start:
 
 start:
 	xor rdi, rdi
-	xor rax, rax
-	inc rax
-
 	sub rsp, 8
 	mov dword [rsp], 0
 	mov rsi, rsp
