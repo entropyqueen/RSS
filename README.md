@@ -7,25 +7,35 @@ The second version loops through the filedescriptors ; and make a call to recvfr
 
 To compile it use :
 
+   ```
    nasm -o shellcode.o -felf64 shellcode.s
+   ```
 
 To link it (that step should not be necessary) :
 
+   ```
    ld -o shellcode shellcode.o
+   ```
 
 For the test server, you should :
 
 Compile it with gcc :
 
+   ```
    gcc -o server serv_test.c
+   ```
 
 And then you should run execstack, wich will allow code execution on the stack. This is needed because we store the user's buffer in an array on the stack, and then execute it. Execstack should be one your repository :
 
+   ```
    apt-get install execstack
+   ```
 
 And then run :
    
+   ```
    execstack -s ./server
+   ```
 
 When you've done all of this, you can run the server.
 And to get the shellcode, I use the command line (thanks to http://www.commandlinefu.com for that) in a script (I called it 'getsc') :
