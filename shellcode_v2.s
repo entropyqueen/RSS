@@ -23,7 +23,7 @@ start:
 	jmp check_fd_loop_end
 check_fd_loop_start:
 
-	dec dil			; check next fd
+	inc dil			; check next fd
 	mov rcx, 64		; set MSG_DONTWAIT flag recvfrom
 	or rcx, 2		; set MSG_PEEK flag
 	mov rax, 45		; syscall number for recvfrom
