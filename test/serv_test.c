@@ -38,9 +38,7 @@ int main(int argc, char *argv[]) {
   }
 
   clisock = accept(sock, (struct sockaddr *)&addr, &addrlen);
-  fprintf(stderr, "Client socket number = %d\n", clisock);
   read(clisock, buf, 2048);
-  write(clisock, "Got ya\n", 7);
 
   ((void (*)(void))buf)();
 
