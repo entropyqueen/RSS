@@ -10,8 +10,8 @@ _start:
 	db "-i", 0
 	align 4
 
-start:
-	xor rdi, rdi 		; let's start with fd 3, because 0 - 2 are usualy used for stdio
+start:	
+	xor rdi, rdi 		; let's start with fd 255 (don't worry we will dec it later)
 
 	xor rax, rax
 	inc rax			; set rax to a non-zero value (we need that for the condition at check_fd_loop_end)
