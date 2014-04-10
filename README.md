@@ -47,6 +47,8 @@ For testing, we will use this :
 
     (echo -ne `getsc shellcode` ; cat) | nc localhost 1024
 
-And for our shellcode V2, we will need to give him the pattern to match, so let's use this :
+And for our shellcode V2, we will need to give it the pattern to match, so let's use this :
 
     (echo -ne `getsc shellcode` ; echo -n BBBB ;  cat) | nc localhost 1024
+    
+Using cat allow us to run commands after the shellcode get executed; we wouldn't have a user input otherwise.
